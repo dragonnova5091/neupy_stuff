@@ -33,14 +33,14 @@ def run_neural_net(connection, data):
     cgnet = algorithms.ConjugateGradient(
         connection,
         search_method = 'golden',
-        show_epoch=1,
+        show_epoch=5,
         verbose=True,
         addons=[algorithms.LinearSearch],
 
     )
 
     time_start = time.time()
-    cgnet.train(x_train, y_train, x_test, y_test, epochs=5)
+    cgnet.train(x_train, y_train, x_test, y_test, epochs=50)
     time_end = time.time()
 
     #plots.error_plot(cgnet)

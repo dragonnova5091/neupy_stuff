@@ -20,7 +20,7 @@ class NetController:
     def __init__(self):
         self.population = []
 
-        self.size_population = 4
+        self.size_population = 20
 
         self.inputneurons = 13
         self.outputneurons = 1
@@ -63,6 +63,10 @@ class NetController:
             print(result)
             self.population[index][2] = [0,result]
         self.fitness()
+        while self.best_members[0][3][0] > 100:
+            self.fitness()
+
+
 
     def fitness(self):
         for index, member in enumerate(self.population):
@@ -75,20 +79,21 @@ class NetController:
         self.population = sorted(self.population, key=lambda member: member[2][0])
         print(self.population)
 
-        best_members = []
+        self.best_members = []
         for index in range(0, int(min(10.0, len(self.population)/2.0))):
-            best_members.append(self.population[index])
+            self.best_members.append(self.population[index])
 
-        new_pop = best_members
+        new_pop = self.best_members
 
         for i in range(0, int(self.size_population-(len(self.population)/2.0))):
-            new_mem = best_members[random.randint(0,len(best_members)-1)]
+            new_mem = self.best_members[random.randint(0,len(self.best_members)-1)]
             new_mem = self.mutate(new_mem)
             new_pop.append(new_mem)
 
         print()
         print(self.population)
         print(new_pop)
+        self.population = new_pop
 
     def mutate(self, member):
         #[network, [neurons per layer], [tpye of activation function],
