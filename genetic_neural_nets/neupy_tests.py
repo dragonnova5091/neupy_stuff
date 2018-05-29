@@ -40,7 +40,7 @@ def run_neural_net(connection, data):
     )
 
     time_start = time.time()
-    cgnet.train(x_train, y_train, x_test, y_test, epochs=50)
+    cgnet.train(x_train, y_train, x_test, y_test, epochs=10)
     time_end = time.time()
 
     #plots.error_plot(cgnet)
@@ -49,12 +49,12 @@ def run_neural_net(connection, data):
     error = mae(target_scalar.inverse_transform(y_test), \
                   target_scalar.inverse_transform(y_predict))
 
-    print(time_end - time_start)
+    #print(time_end - time_start)
 
     #print(target_scalar.inverse_transform(y_test), \
     #              target_scalar.inverse_transform(y_predict))
 
-    print(error)
+    #print(error)
 
     return([time_end - time_start, error])
 #--------------------------------------------
