@@ -40,7 +40,7 @@ def run_neural_net(connection, data):
     )
 
     time_start = time.time()
-    cgnet.train(x_train, y_train, x_test, y_test, epochs=10)
+    cgnet.train(x_train, y_train, x_test, y_test, epochs=50)
     time_end = time.time()
 
     #plots.error_plot(cgnet)
