@@ -20,7 +20,7 @@ class NetController:
     def __init__(self):
         self.population = []
 
-        self.size_population = 6
+        self.size_population = 20
 
         self.inputneurons = 4
         self.outputneurons = 1
@@ -54,14 +54,14 @@ class NetController:
         #print(self.population)
 
         self.run()
-        while self.best_members[0][2][0] > 100:
+        while self.best_members[0][2][0] > 10:
             print("next iteration")
             print(self.population)
 
             self.run()
 
-        file = open("pickle_bestnet.txt", "w")
-        pickle.dump( self.best_members, file)
+        #file = open("pickle_bestnet.txt", "w")
+        #pickle.dump( self.best_members, file)
 
     def run(self):
         for index, member in enumerate(self.population):
@@ -71,7 +71,10 @@ class NetController:
             print(member[0])
             print("running member ", index)
             print("\n\n\n")
-            result = neupy_tests.run_neural_net(member[0], self.data)
+            try:
+                result = neupy_tests.run_neural_net(member[0], self.data)
+            except:
+                result = [1000,1000]
 
             #print(result)
             self.population[index][2] = [0,result]
